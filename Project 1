@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+/*The purpose of this program is to break down any number from 2 through 1000000 into its prime factors.*/
+
+int main()
+{
+
+    int n;
+    int f=2;
+    int counter=1;
+    
+    do {
+        printf("Please enter a number from 2 to 1,000,000: ");
+        scanf("%d", &n);
+    } while ((n < 1) || (n > 1000001));
+    
+    while (counter==1) {  
+    /*This while loop is designed to be the first case so that it does not produce an * at the beginning.*/
+        
+        if (n % f == 0) {
+            printf("%d",f);
+            counter=counter+1;
+            n = n / f;
+            continue;
+        }
+        else {
+            f = f+1;
+        }
+    }     
+        while (n !=1) {  
+        /*This while loop is designed to be every other case such that it produces all prime factors of n (the user inputted number).*/
+        
+        if (n % f == 0) {
+            printf(" * %d",f);
+            n = n / f;
+            continue;
+        }
+        else {
+            f = f+1;
+        }
+    }
+    return 0;
+}
