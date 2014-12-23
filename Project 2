@@ -1,0 +1,51 @@
+/* This is designed to take the weighted average of all the inputted grades and format them nicely into a grid.
+ * By: Ross Kaplan */
+
+#include <stdio.h>
+
+int row, col;
+
+int read_data(int[15][5]);
+int print_data(int[15][5]);
+
+/* This just calls the functions read_data and print_data */
+
+int main(void)
+
+{
+    int arr[15][5];
+    read_data(arr);
+    print_data(arr);
+    
+    return 0;
+    
+}
+
+/* This is designed to read the data from the text provided and store it into an array named arr. */
+
+int read_data(int arr[15][5])
+{
+    for(row=0;row<=14;row++)
+        for(col=0; col<=4; col++)
+            scanf("%d", &arr[row][col]);
+    
+return 0;
+    
+}
+
+/* This is designed to take the data that's stored in the array named arr and print it into a chart with the weighted average printed */
+
+int print_data(int arr[15][5])
+
+{
+    printf("  STUD # PROG #1 PROG #2 PROG #3 PROG #4    EXAM AVERAGE\n");
+    for (row=0; row<=14; row++)
+    {
+        printf("%8d",row+1);
+        for(col=0; col<=4; col++)
+            printf("%8d", arr[row][col]);
+        printf("%8.2f",.1*arr[row][0]+.15*arr[row][1]+.15*arr[row][2]+.2*arr[row][3]+.4*arr[row][4]);
+        printf("\n");
+    }
+return 0;
+}
