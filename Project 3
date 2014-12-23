@@ -1,0 +1,116 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+char input_file(char str[], char reversestr[]);
+char* reverse_string(char str[]);
+char* remove_uppercase(char str[]);
+char remove_symbols(char str[]);
+char* palindrome_detector(char str[]);
+
+
+int main(void)
+
+{
+    char str[50], reversestr[50];
+    input_file(str, reversestr);
+    return 0;
+    
+}
+
+char input_file(char str[], char reversestr[])
+
+{
+    FILE *sourcetext, *destinationtext;
+    int counter = 0, palindromes;
+    char array[50];
+    char *str2, *judgment;
+    
+    printf("Enter name of input file: ");
+    scanf("%s", str);
+    sourcetext = fopen(str, "r");
+    if (sourcetext == NULL)
+    {
+        fprintf(stderr, "Input file could not be found.\n");
+        exit(1);
+    }
+    printf("What is your destination file name? ");
+    scanf("%s", array);
+    destinationtext = fopen(array, "w");
+    
+    fscanf(sourcetext, "%d", &palindromes);
+    
+    for (counter = 0; counter < palindromes; counter++)
+    {
+        fscanf(sourcetext, "%s", str);
+        str2 = remove_uppercase(str);
+        reversestr = reverse_string(str2);
+        judgment = palindrome_detector(reversestr);
+    }
+        
+        
+    return 0;
+}
+
+char* remove_uppercase(char *str)
+
+{
+    int x = 0, y = 0;
+    int length;
+    
+    char *result, character;
+    
+    length = strlen(str);
+    result = (char*)malloc(length+1);
+    
+    for(x=0; x < length; x++)
+    {
+        if((str[x] >= 'A') && (str[x]<= 'Z'))
+        {
+            *(result+y) = tolower(str[x]);
+            y++;
+        }
+        if((str[x] >= 'a') && (str[x] <= 'z'))
+        {
+            *(result+y) = str[x];
+            y++;
+        }
+
+    }
+    
+    *(result+y) = '\0';
+    
+    return result;
+}
+char* reverse_string(char *str2)
+
+{
+
+    char reversestr[50];
+    
+    int end = 0;
+    int start = 0;
+    
+    for(end = strlen(str2) - 1;end > 0;end--)
+    {
+        reversestr[start]= str2[end];
+        start++;
+    }
+ 
+    reversestr[end] = '\0';
+    
+    return reversestr;
+}
+
+char* palindrome_detector(char *reversestr)
+
+{
+    char* *str2;
+    char* destinationtext;
+    if(strcmp(*str2, reversestr) ==0)
+        fprintf(destinationtext, "PALINDROME");
+    else
+        fprintf(destinationtext, "NOT A PALINDROME");
+    return 0;
+}
